@@ -1,4 +1,4 @@
-// Maximum Subarray
+// Maximum Subarray (Kadane's Algorithm)
 class Solution {
     public int maxSubArray(int[] nums) {
         int sum = nums[0];
