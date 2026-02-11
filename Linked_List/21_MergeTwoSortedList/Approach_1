@@ -1,0 +1,28 @@
+class Solution {
+    public ListNode arrayToList(List<Integer> arr){
+        ListNode dummy = new ListNode(-1);
+        ListNode temp = dummy;
+        for(int n : arr){
+            temp.next = new ListNode(n);
+            temp = temp.next;
+        }
+        return dummy.next;
+    }
+
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        List<Integer> arr = new ArrayList<>();
+        while(list1 != null){
+            arr.add(list1.val);
+            list1 = list1.next;
+        }
+        while(list2 != null){
+            arr.add(list2.val);
+            list2 = list2.next;
+        }
+        Collections.sort(arr);
+        ListNode head = arrayToList(arr);
+        return head;
+    }
+}
+//Time Complexity: O((n + m) log(n + m))
+//Space Complexity: O(n + m)
