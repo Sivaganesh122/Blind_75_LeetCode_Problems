@@ -1,0 +1,13 @@
+// Brian Kernighan's Algorithm(He is a lengendary computer scientist, Co-authoring the C programming language with Dennis Ritchie. He documented and popularized this exxat trick)
+class Solution {
+    public int hammingWeight(int n) {
+        int count = 0;
+        while(n!=0){
+            n = n&(n-1);
+            count++;
+        }
+        return count;
+    }
+}
+//Time Complexity: O(k) where k = number of 1-bits
+//Space Complexity: O(1)
