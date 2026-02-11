@@ -1,0 +1,15 @@
+class Solution {
+    public int findMin(int[] nums) {
+        int max = nums[0];
+        for(int n: nums){
+            if(n<max){
+                return n;
+            }else{
+                max = n;
+            }
+        }
+        return nums[0];
+    }
+}
+//Time Complexity: O(n)
+//Space Complexity: O(1)
