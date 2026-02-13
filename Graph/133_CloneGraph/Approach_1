@@ -1,0 +1,20 @@
+class Solution {
+    public Node cloneGraph(Node node) {
+        if(node == null) return null;
+        Map<Node,Node> map = new HashMap<>();
+        Queue<Node> q = new LinkedList<>();
+        q.add(node);
+        map.put(node,new Node(node.val));
+        while(!q.isEmpty()){
+            Node cur = q.poll();
+            for(Node ni: cur.neighbors){
+                if(!map.containsKey(ni)){
+                    map.put(ni, new Node(ni.val));
+                    q.add(ni);
+                }
+                map.get(cur).neighbors.add(map.get(ni));
+            }
+        }
+        return map.get(node);
+    }
+}
