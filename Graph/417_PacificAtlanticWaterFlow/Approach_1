@@ -1,0 +1,58 @@
+class Solution {
+    
+    int[][] directions ={{0,1},{0,-1},{1,0},{-1,0}};
+    
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        List<List<Integer>> result = new ArrayList<>();
+        int m = heights.length;
+        int n = heights[0].length;
+
+        boolean[][] pac = new boolean[m][n];
+        boolean[][] atl = new boolean[m][n];
+
+        Queue<int[]> pacQueue = new LinkedList<>();
+        Queue<int[]> atlQueue = new LinkedList<>();
+
+        for(int i = 0; i<m; i++){
+            pacQueue.offer(new int[]{i,0});
+            atlQueue.offer(new int[]{i,n-1});
+            pac[i][0] = true;
+            atl[i][n-1] = true;
+        }
+
+        for (int j = 0; j < n; j++) {
+            pacQueue.offer(new int[]{0,j});
+            atlQueue.offer(new int[]{m-1,j});
+            pac[0][j] = true;
+            atl[m-1][j] = true;
+        }
+
+        bfs(heights, pacQueue, pac);
+        bfs(heights, atlQueue, atl);
+
+        for(int i = 0; i<m; i++){
+            for(int j = 0; j<n; j++){
+                if(pac[i][j] && atl[i][j]){
+                    result.add(Arrays.asList(i,j));
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public void bfs(int[][] h, Queue<int[]> queue, boolean[][] visited) {
+        while (!queue.isEmpty()) {
+            int[] cell = queue.poll();
+            for (int[] d : directions) {
+                int nr = cell[0] + d[0]; 
+                int nc = cell[1] + d[1];
+                if (nr>=0 && nc>=0 && nr<h.length && nc<h[0].length &&
+                    !visited[nr][nc] && h[nr][nc] >= h[cell[0]][cell[1]]) {
+                    visited[nr][nc] = true;
+                    queue.offer(new int[]{nr,nc});
+                }
+            }
+        }
+    }
+}
